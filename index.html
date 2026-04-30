@@ -9,7 +9,7 @@
             background-color: #000;
             background-image: radial-gradient(circle at center, #1a0000 0%, #000 100%); 
             color: #d1d1d1;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -17,57 +17,58 @@
             min-height: 100vh;
             padding: 20px;
         }
-        h1 { color: #ff1a1a; text-shadow: 0 0 10px #ff0000; text-transform: uppercase; margin-bottom: 5px; }
-        .subtitle { color: #888; margin-bottom: 30px; font-size: 0.9rem; }
+        h1 { color: #ff1a1a; text-shadow: 0 0 10px #ff0000; text-transform: uppercase; text-align: center; margin-bottom: 5px; }
+        .subtitle { color: #888; margin-bottom: 30px; text-align: center; font-size: 0.9rem; }
         .main-container { width: 100%; max-width: 900px; }
-        
+
         /* Dual Box Layout */
         .zones-wrapper { display: flex; gap: 20px; width: 100%; margin-bottom: 20px; }
         .drop-zone {
-            flex: 1; height: 200px; border: 2px dashed #440000; background: rgba(20, 0, 0, 0.4);
+            flex: 1; height: 180px; border: 2px dashed #440000; background: rgba(20, 0, 0, 0.3);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            border-radius: 12px; cursor: pointer; transition: all 0.3s ease; text-align: center; padding: 15px;
+            border-radius: 10px; cursor: pointer; transition: 0.3s; text-align: center; padding: 10px;
         }
-        .drop-zone:hover { border-color: #ff1a1a; background: rgba(40, 0, 0, 0.5); }
-        .drop-zone.loaded { border-color: #ff1a1a; background: rgba(80, 0, 0, 0.3); box-shadow: 0 0 15px rgba(255, 26, 26, 0.4); border-style: solid; }
+        .drop-zone:hover { border-color: #ff1a1a; background: rgba(40, 0, 0, 0.4); }
+        .drop-zone.loaded { border-color: #ff1a1a; background: rgba(80, 0, 0, 0.3); box-shadow: 0 0 15px #ff1a1a; border-style: solid; }
         
         .btn-group { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
         button {
             background: #000; color: #ff1a1a; border: 1px solid #ff1a1a;
-            padding: 12px 35px; font-weight: bold; cursor: pointer; text-transform: uppercase;
-            transition: 0.2s; border-radius: 4px;
+            padding: 12px 30px; font-weight: bold; cursor: pointer; text-transform: uppercase;
+            border-radius: 4px;
         }
-        button:hover:not(:disabled) { background: #ff1a1a; color: #000; box-shadow: 0 0 10px #ff1a1a; }
-        button:disabled { border-color: #444; color: #444; cursor: not-allowed; }
+        button:hover:not(:disabled) { background: #ff1a1a; color: #000; }
+        button:disabled { border-color: #444; color: #444; }
 
-        /* Result View */
-        .file-header { display: flex; justify-content: space-between; align-items: center; margin: 30px 0 10px; border-bottom: 1px solid #330000; padding-bottom: 5px; }
+        .file-header { display: flex; justify-content: space-between; align-items: center; margin: 25px 0 10px 0; border-bottom: 1px solid #330000; }
         textarea {
-            width: 100%; height: 350px; background: #080808; color: #ff4d4d;
-            border: 1px solid #330000; padding: 15px; box-sizing: border-box; 
-            font-family: 'Consolas', 'Monaco', monospace; resize: none; border-radius: 4px;
+            width: 100%; height: 300px; background: #080808; color: #ff4d4d;
+            border: 1px solid #330000; padding: 15px; box-sizing: border-box; font-family: monospace; resize: none;
         }
-        
+
         @media (max-width: 600px) { .zones-wrapper { flex-direction: column; } }
-        #upload-view, #result-view { display: none; width: 100%; }
+        
+        /* Ensure upload view is visible by default */
+        #upload-view { display: block; width: 100%; }
+        #result-view { display: none; width: 100%; }
     </style>
 </head>
 <body>
 
     <div class="main-container">
         <h1>FRST Logs Upload</h1>
-        <p class="subtitle">Upload FRST.txt and Addition.txt to generate a shareable link.</p>
+        <p class="subtitle">Drag and drop FRST.txt and Addition.txt, then hit Finalize.</p>
 
-        <div id="upload-view" style="display: block;">
+        <div id="upload-view">
             <div class="zones-wrapper">
                 <div class="drop-zone" id="zone-frst" onclick="document.getElementById('input-frst').click()">
-                    <strong style="font-size: 1.2rem;">FRST.txt</strong>
-                    <p id="name-frst" style="margin-top: 10px; color: #888;">Tap to select or drop file</p>
+                    <strong>FRST.txt</strong>
+                    <p id="name-frst" style="font-size: 0.8rem; color: #888;">No file selected</p>
                     <input type="file" id="input-frst" hidden accept=".txt">
                 </div>
                 <div class="drop-zone" id="zone-add" onclick="document.getElementById('input-add').click()">
-                    <strong style="font-size: 1.2rem;">Addition.txt</strong>
-                    <p id="name-add" style="margin-top: 10px; color: #888;">Tap to select or drop file</p>
+                    <strong>Addition.txt</strong>
+                    <p id="name-add" style="font-size: 0.8rem; color: #888;">No file selected</p>
                     <input type="file" id="input-add" hidden accept=".txt">
                 </div>
             </div>
@@ -78,7 +79,7 @@
 
         <div id="result-view">
             <div class="btn-group">
-                <button onclick="window.location.href=window.location.href.split('?')[0]">New Upload</button>
+                <button onclick="clearAll()">New Upload</button>
                 <button id="copyBtn" onclick="copyLink()">Copy Shareable Link</button>
             </div>
             <div id="log-containers"></div>
@@ -86,110 +87,94 @@
     </div>
 
     <script>
-        // TOOBFSCAON
-        const p1 = "github_pat_11BRVGUEI0GsAXGMG43tYd_";
+        // F
+        const p1 = "github_pat_11BRVGUEI0GsAXGMG43tYd_"; 
         const p2 = "sYRAzMakYhMc8oYbKSCOifekH29Kn4rqH9vUYBVJSdTDADNBECSsQEFrOfY";
         const KEY = p1 + p2;
 
         let logs = { "FRST.txt": null, "Addition.txt": null };
 
+        // FILE HANDLING
         function setup(zId, iId, key) {
             const zone = document.getElementById(zId), input = document.getElementById(iId);
             const nameLabel = document.getElementById('name-' + (key === 'FRST.txt' ? 'frst' : 'add'));
             
-            const handleFile = (file) => {
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = (e) => {
+            const load = (f) => {
+                if (!f) return;
+                const r = new FileReader();
+                r.onload = (e) => {
                     logs[key] = e.target.result;
                     zone.classList.add('loaded');
-                    nameLabel.innerText = "✔ " + file.name;
+                    nameLabel.innerText = "✔ " + f.name;
                     nameLabel.style.color = "#ff1a1a";
                 };
-                reader.readAsText(file);
+                r.readAsText(f);
             };
 
             zone.ondragover = (e) => { e.preventDefault(); zone.style.borderColor = "#ff1a1a"; };
             zone.ondragleave = () => { if(!logs[key]) zone.style.borderColor = "#440000"; };
-            zone.ondrop = (e) => { e.preventDefault(); handleFile(e.dataTransfer.files[0]); };
-            input.onchange = (e) => { handleFile(e.target.files[0]); };
+            zone.ondrop = (e) => { e.preventDefault(); load(e.dataTransfer.files[0]); };
+            input.onchange = (e) => { load(e.target.files[0]); };
         }
 
         setup('zone-frst', 'input-frst', 'FRST.txt');
         setup('zone-add', 'input-add', 'Addition.txt');
 
+        // UPLOAD PROCESS
         async function doUpload() {
-            const filesToUpload = {};
-            for (let k in logs) { if (logs[k]) filesToUpload[k] = { content: logs[k] }; }
-            
-            if (Object.keys(filesToUpload).length === 0) {
-                return alert("Please select at least one log file.");
-            }
+            const f = {};
+            for (let k in logs) { if (logs[k]) f[k] = { content: logs[k] }; }
+            if (Object.keys(f).length === 0) return alert("Please select a file first.");
 
-            const btn = document.getElementById('upBtn');
-            btn.innerText = "UPLOADING...";
-            btn.disabled = true;
+            const b = document.getElementById('upBtn');
+            b.innerText = "UPLOADING...";
+            b.disabled = true;
 
             try {
-                const response = await fetch("https://api.github.com/gists", {
+                const r = await fetch("https://api.github.com/gists", {
                     method: "POST",
-                    headers: { "Authorization": `token ${KEY}`, "Content-Type": "application/json" },
-                    body: JSON.stringify({ public: false, files: filesToUpload })
+                    headers: { "Authorization": `token ${KEY}` },
+                    body: JSON.stringify({ public: false, files: f })
                 });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    const cleanUrl = window.location.href.split('?')[0];
-                    window.location.href = cleanUrl + `?id=${data.id}`;
+                if (r.ok) {
+                    const d = await r.json();
+                    const cleanUrl = window.location.origin + window.location.pathname;
+                    window.location.href = cleanUrl + "?id=" + d.id;
                 } else {
-                    throw new Error("Upload failed");
+                    throw new Error();
                 }
-            } catch (err) {
-                alert("Error: Token might be expired or GitHub is blocking the request.");
-                btn.innerText = "Finalize & Generate Link";
-                btn.disabled = false;
+            } catch (e) {
+                alert("Upload failed. Token may be expired.");
+                b.innerText = "Finalize & Generate Link";
+                b.disabled = false;
             }
         }
 
-        // LOAD RESULTS
-        const urlParams = new URLSearchParams(window.location.search);
-        const gistId = urlParams.get('id');
-
-        if (gistId) {
+        // VIEW CONTROLLER
+        const id = new URLSearchParams(window.location.search).get('id');
+        if (id && id.length > 5) {
             document.getElementById('upload-view').style.display = 'none';
             document.getElementById('result-view').style.display = 'block';
 
-            fetch(`https://api.github.com/gists/${gistId}`)
-                .then(r => r.json())
-                .then(data => {
-                    const container = document.getElementById('log-containers');
-                    Object.keys(data.files).forEach(filename => {
-                        const wrapper = document.createElement('div');
-                        wrapper.innerHTML = `
-                            <div class="file-header">
-                                <h3>${filename}</h3>
-                                <button onclick="downloadFile('${filename}', \`${encodeURIComponent(data.files[filename].content)}\`)">Download .txt</button>
-                            </div>
-                            <textarea readonly>${data.files[filename].content}</textarea>
-                        `;
-                        container.appendChild(wrapper);
-                    });
+            fetch(`https://api.github.com/gists/${id}`).then(r => r.json()).then(d => {
+                const c = document.getElementById('log-containers');
+                Object.keys(d.files).forEach(n => {
+                    const v = document.createElement('div');
+                    v.innerHTML = `<div class="file-header"><h3>${n}</h3></div><textarea readonly>${d.files[n].content}</textarea>`;
+                    c.appendChild(v);
                 });
+            }).catch(() => clearAll());
         }
 
-        function downloadFile(name, content) {
-            const blob = new Blob([decodeURIComponent(content)], { type: 'text/plain' });
-            const a = document.createElement("a");
-            a.href = URL.createObjectURL(blob);
-            a.download = name;
-            a.click();
+        function clearAll() {
+            window.location.href = window.location.origin + window.location.pathname;
         }
 
         function copyLink() {
             navigator.clipboard.writeText(window.location.href);
-            const cBtn = document.getElementById('copyBtn');
-            cBtn.innerText = "COPIED!";
-            setTimeout(() => cBtn.innerText = "Copy Shareable Link", 2000);
+            document.getElementById('copyBtn').innerText = "COPIED!";
+            setTimeout(() => { document.getElementById('copyBtn').innerText = "Copy Shareable Link"; }, 2000);
         }
     </script>
 </body>
