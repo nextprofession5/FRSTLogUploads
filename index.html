@@ -6,9 +6,9 @@
     <title>FRST & ESET Logs</title>
     <style>
         body {
-            background-color: #121212;
-            background-image: radial-gradient(circle at center, #1f1212 0%, #0d0d0d 100%); 
-            color: #b0bac4;
+            background-color: #1c1c1c;
+            background-image: radial-gradient(circle at center, #2b1a1a 0%, #141414 100%); 
+            color: #ced6dd;
             font-family: 'Segoe UI', Roboto, sans-serif;
             margin: 0;
             display: flex;
@@ -18,7 +18,7 @@
             padding: 20px;
         }
         h1 { 
-            color: #d63636; 
+            color: #e03b3b; 
             margin-bottom: 25px; 
             text-align: center;
             font-weight: 400;
@@ -29,42 +29,42 @@
         .main-container { width: 100%; max-width: 1100px; }
 
         #upload-view { 
-            background: #1a1a1a; 
+            background: #262626; 
             padding: 20px; 
             border-radius: 4px; 
-            border: 1px solid #2d2d2d;
+            border: 1px solid #3a3a3a;
             margin-bottom: 20px;
         }
         .zones-wrapper { display: flex; gap: 15px; width: 100%; margin-bottom: 15px; }
         .drop-zone {
-            flex: 1; height: 120px; border: 1px dashed #3a3a3a; background: #111111;
+            flex: 1; height: 120px; border: 1px dashed #4a4a4a; background: #1a1a1a;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             border-radius: 4px; cursor: pointer; transition: 0.15s; text-align: center; padding: 10px;
-            box-sizing: border-box; color: #888888;
+            box-sizing: border-box; color: #a0a0a0;
             font-weight: 400;
             font-size: 0.85rem;
         }
-        .drop-zone:hover { border-color: #9c2a2a; background: #161616; color: #aaaaaa; }
-        .drop-zone.loaded { border-color: #d63636; border-style: solid; color: #d63636; background: #1c1414; }
+        .drop-zone:hover { border-color: #ba3232; background: #222222; color: #c0c0c0; }
+        .drop-zone.loaded { border-color: #e03b3b; border-style: solid; color: #e03b3b; background: #2b1f1f; }
         
         .btn-group { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
         button {
-            background: #1a1a1a; color: #aaaaaa; border: 1px solid #3a3a3a;
+            background: #262626; color: #c0c0c0; border: 1px solid #4a4a4a;
             padding: 9px 20px; font-weight: 400; cursor: pointer; text-transform: uppercase;
             border-radius: 4px; font-size: 0.75rem; transition: 0.15s;
         }
-        button:hover:not(:disabled) { border-color: #d63636; color: #d63636; background: #121212; }
-        button:disabled { border-color: #262626; color: #444444; cursor: not-allowed; }
+        button:hover:not(:disabled) { border-color: #e03b3b; color: #e03b3b; background: #1c1c1c; }
+        button:disabled { border-color: #333333; color: #555555; cursor: not-allowed; }
 
         .file-header { 
             display: flex; justify-content: space-between; align-items: center; 
-            margin-top: 30px; padding: 10px; background: #1a1a1a; border-left: 2px solid #d63636;
+            margin-top: 30px; padding: 10px; background: #262626; border-left: 2px solid #e03b3b;
             border-radius: 4px 4px 0 0;
         }
-        .file-header h3 { margin: 0; font-size: 0.85rem; color: #d63636; font-weight: 400; }
+        .file-header h3 { margin: 0; font-size: 0.85rem; color: #e03b3b; font-weight: 400; }
         textarea {
-            width: 100%; height: 500px; background: #0a0a0a; color: #f26d6d;
-            border: 1px solid #222222; padding: 15px; box-sizing: border-box; 
+            width: 100%; height: 500px; background: #121212; color: #f78888;
+            border: 1px solid #2d2d2d; padding: 15px; box-sizing: border-box; 
             font-family: 'Consolas', monospace; resize: vertical; border-radius: 0 0 4px 4px; outline: none;
             font-weight: 400;
             font-size: 0.9rem;
@@ -82,17 +82,17 @@
             <div class="zones-wrapper">
                 <div class="drop-zone" id="zone-frst" onclick="document.getElementById('input-frst').click()">
                     <span>FRST.txt</span>
-                    <p id="name-frst" style="font-size: 0.7rem; color: #5c646e; margin: 6px 0 0 0;">Select File</p>
+                    <p id="name-frst" style="font-size: 0.7rem; color: #78828c; margin: 6px 0 0 0;">Select File</p>
                     <input type="file" id="input-frst" hidden accept=".txt">
                 </div>
                 <div class="drop-zone" id="zone-add" onclick="document.getElementById('input-add').click()">
                     <span>Addition.txt</span>
-                    <p id="name-add" style="font-size: 0.7rem; color: #5c646e; margin: 6px 0 0 0;">Select File</p>
+                    <p id="name-add" style="font-size: 0.7rem; color: #78828c; margin: 6px 0 0 0;">Select File</p>
                     <input type="file" id="input-add" hidden accept=".txt">
                 </div>
                 <div class="drop-zone" id="zone-eset" onclick="document.getElementById('input-eset').click()">
                     <span>ESET Scan.txt</span>
-                    <p id="name-eset" style="font-size: 0.7rem; color: #5c646e; margin: 6px 0 0 0;">Select File</p>
+                    <p id="name-eset" style="font-size: 0.7rem; color: #78828c; margin: 6px 0 0 0;">Select File</p>
                     <input type="file" id="input-eset" hidden accept=".txt">
                 </div>
             </div>
@@ -105,16 +105,16 @@
             <div class="btn-group">
                 <button id="toggleBtn" onclick="toggleUploader()">+ New Upload / Show Boxes</button>
                 <button id="copyBtn" onclick="copyLink()">Copy Link</button>
-                <button onclick="clearPage()" style="color: #5c646e; border-color: #2d2d2d;">Clear Page</button>
+                <button onclick="clearPage()" style="color: #78828c; border-color: #3a3a3a;">Clear Page</button>
             </div>
             <div id="log-containers"></div>
         </div>
     </div>
 
     <script>
-        const chunkA = ["gi", "th", "ub", "_p", "at", "_"].join("");
-        const chunkB = ["11BR", "VGUE", "I0I6", "RkW0", "kqwB", "WW_K"].join("");
-        const chunkC = ["tBmE", "NMfI", "U2Lq", "dW6g", "Bxvt", "mxlL", "RWYF", "LSjc", "0zpO", "AB7Y", "cIQV", "6FCN", "42pO", "HYPy", "TJ"].join("");
+        const chunkA = 'gi' + 'th' + 'ub' + '_p' + 'at' + '_';
+        const chunkB = '11BR' + 'VGUE' + 'I0I6' + 'RkW0' + 'kqwB' + 'WW_K';
+        const chunkC = 'tBmE' + 'NMfI' + 'U2Lq' + 'dW6g' + 'Bxvt' + 'mxlL' + 'RWYF' + 'LSjc' + '0zpO' + 'AB7Y' + 'cIQV' + '6FCN' + '42pO' + 'HYPy' + 'TJ';
         const KEY = chunkA + chunkB + chunkC;
         
         let logs = { "FRST.txt": null, "Addition.txt": null, "ESET_Scan.txt": null };
@@ -153,13 +153,13 @@
             try {
                 const r = await fetch("https://api.github.com/gists", {
                     method: "POST", 
-                    headers: { "Authorization": `token ${KEY}` },
+                    headers: { "Authorization": "token " + KEY },
                     body: JSON.stringify({ public: false, files: f })
                 });
 
                 if (r.ok) {
                     const d = await r.json();
-                    window.location.href = window.location.origin + window.location.pathname + `?id=${d.id}`;
+                    window.location.href = window.location.origin + window.location.pathname + "?id=" + d.id;
                 } else {
                     throw new Error();
                 }
@@ -183,17 +183,16 @@
             document.getElementById('upload-view').style.display = 'none';
             document.getElementById('result-view').style.display = 'block';
 
-            fetch(`https://api.github.com/gists/${id}`).then(r => r.json()).then(d => {
+            fetch("https://api.github.com/gists/" + id).then(r => r.json()).then(d => {
                 const c = document.getElementById('log-containers');
                 Object.keys(d.files).forEach(n => {
                     const v = document.createElement('div');
-                    v.innerHTML = `
-                        <div class="file-header">
-                            <h3>${n}</h3>
-                            <button onclick="dl('${n}', \`${encodeURIComponent(d.files[n].content)}\`)">Download</button>
-                        </div>
-                        <textarea readonly>${d.files[n].content}</textarea>
-                    `;
+                    const fileContent = d.files[n].content;
+                    
+                    v.innerHTML = '<div class="file-header"><h3>' + n + '</h3>' +
+                                  '<button onclick="dl(\'' + n + '\', \'' + encodeURIComponent(fileContent) + '\')">Download</button></div>' +
+                                  '<textarea readonly>' + fileContent + '</textarea>';
+                                  
                     c.appendChild(v);
                 });
             }).catch(() => clearPage());
